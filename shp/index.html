@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title> Leaflet Exercice</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>	
+    <script src="L.switchBasemap.js"></script>	
+    <script src="L.switchBasemap.css"></script>	
+	<script src="roads.js"></script>
+	<script src="iav3D.js"></script>
+
+</head>
+<body>
+
+
+
+<div id="map" style="width: 800px; height: 600px;"></div>
+<script>
+
+	var map = L.map('map').setView([33.97654572387811, -6.866889599963044], 16);
+
+
+	var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		minZoom: 10,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+    
+	var leafletIcon2 = L.icon ({
+		iconUrl: 'LogoESGIT_HD.png',
+		iconSize: [50,50],
+		iconAnchor: [47.5, 47.5],
+		popupAnchor: [33.97654572387811, -6.866889599963044]
+	})
+
+	var marker2 = L.marker([33.97654572387811, -6.866889599963044],{icon:leafletIcon2}).addTo(map);
+
+
+	
+	var circleMarker = L.circleMarker([33.97654572387811, -6.866889599963044], {color: 'red', radius: 30, name: 'Magenta circle'}).addTo(map);
+    polygon.setStyle({ fillOpacity: 0.1 });
+    polygon.bindPopup("IAV hassan 2");
+
+
+</script>
+
+<script>
+	 var iav3D = L.geoJSON(iav3D, {
+        style: function (feature) {
+            // Définissez ici votre style en fonction des propriétés de la feature
+            return {
+                fillColor: 'blue',  // Couleur de remplissage
+                color: 'green',       // Couleur de la bordure
+                weight: 2            // Épaisseur de la bordure
+            };
+        }
+    }).addTo(map);
+	iav3D.eachLayer(function (layer) {
+		layer.bindPopup('<br>Name: ' + layer.feature.properties.name + '<br>Group: ' + layer.feature.properties.group + '<br>');
+});
+</script>
+
+
+
+
+
+
+</body>
+</html>
